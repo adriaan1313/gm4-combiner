@@ -106,4 +106,4 @@ dist
 # Custom stuff
 package-lock.json
 tmp/
-release/
+release/*.zip
