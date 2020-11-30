@@ -17,12 +17,12 @@ async function generate(req, res) {
 	console.log(`downloading`);
 	cloneGit('github:Gamemode4Dev/GM4_Datapacks#master', "tmp", function (err) {
 		if(err){
-			console.log(`Error: ${err}`);
+			console.log(`Error: ${err} from cloneGit`);
 		}else{
 			console.log(`Downloaded!`);
 			merge();
-			if(!fs.existsSync(__dirname+`/release`)) fs.mkdirSync(__dirname+`/release`, {recursive: true});
-			zip(`${__dirname}/tmp/merged`, `${__dirname}/release/gm4_all_${timestamp()}.zip`, (e)=>{console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`)});
+			if(!fs.existsSync(`release/`)) fs.mkdirSync(__dirname+`/release`, {recursive: true});
+			zip(`${__dirname}/tmp/merged`, `release/gm4_all_${timestamp()}.zip`, (e)=>{console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`)});
 		}
 	});
 };
