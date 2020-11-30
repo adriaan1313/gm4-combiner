@@ -22,7 +22,7 @@ async function generate(req, res) {
 		}else{
 			console.log(`Downloaded!`);
 			merge();
-			if(!fs.existsSync(`release/`)) {fs.mkdirSync(__dirname+`/release`, {recursive: true});console.log(`made release`);};
+			if(!fs.existsSync(`release/`)) fs.mkdirSync(__dirname+`/release`, {recursive: true});
 			zip(`${__dirname}/tmp/merged`, `release/gm4_all_${timestamp()}.zip`, (e)=>{console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`)});
 		}
 	});
@@ -36,9 +36,7 @@ function merge(){
 	});
 	if(fs.existsSync("tmp/merged/pack.mcmeta")) fs.unlinkSync("tmp/merged/pack.mcmeta");
 	if(fs.existsSync("tmp/merged/_pack.mcmeta")) fs.unlinkSync("tmp/merged/_pack.mcmeta");
-	console.log(`removed mcmetas`);
-	write(JSON.stringify({"pack":{"pack_format": 6,"description": "All of GM4 combined into one pack!"}}), `/tmp/merged/pack.mcmeta`);
-	console.log(`written new pack.mcmeta`);
+	write(`tmp/merged/pack.mcmeta`, JSON.stringify({"pack":{"pack_format": 6,"description": "All of GM4 combined into one pack!"}}));
 }
 //mergeTags(fs.readdirSync("tmp").filter(name => name.indexOf(`.`) == -1 && name != "gm4_template"));
 function mergeTags(packs) {
@@ -84,7 +82,7 @@ function mergeTags(packs) {
 
 function write(path, data){
 	const a = path.split('/');
-	const b = path.split(a[a.length-1])[0];
+	const b = path.split(a.pop())[0];
 	if(!fs.existsSync(b))	fs.mkdirSync(b, {recursive:true});
 	fs.writeFileSync(path, data);
 }
