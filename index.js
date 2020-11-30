@@ -1,7 +1,7 @@
 const fs = require(`fs`);
 const express = require(`express`);
 const app = express();
-const server = app.listen(80, () => console.log(`listening to port 80`));
+const server = app.listen(5000, () => console.log(`listening to port 80`));
 const cloneGit = require(`download-git-repo`);
 const mergedirs = require('merge-dirs').default;
 const mergeJSON = require(`json-merger`).mergeObjects;
