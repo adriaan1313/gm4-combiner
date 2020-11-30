@@ -14,6 +14,7 @@ async function generate(req, res) {
 		console.log(`removing tmp`);
 		fs.rmdirSync('tmp', { recursive: true });
 	}
+	fs.mkdirSync(__dirname+`/tmp`, {recursive: true});
 	console.log(`downloading`);
 	cloneGit('github:Gamemode4Dev/GM4_Datapacks#master', "tmp", function (err) {
 		if(err){
