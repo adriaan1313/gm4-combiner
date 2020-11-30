@@ -21,7 +21,7 @@ async function generate(req, res) {
 		}else{
 			console.log(`Downloaded!`);
 			merge();
-			if(!fs.existsSync(`release`))	fs.mkdirSync(`/release`, {recursive: true});
+			if(!fs.existsSync(`release`))	fs.mkdirSync(`/release`, {recursive: true}, err => console.log(err));
 			zip(`${__dirname}/tmp/merged`, `${__dirname}/release/gm4_all_${timestamp()}.zip`, (e)=>{console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`)});
 		}
 	});
