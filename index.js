@@ -1,13 +1,13 @@
 const fs = require(`fs`);
 const express = require(`express`);
 const app = express();
-const server = app.listen(process.env.PORT || 5000, () => console.log(`listening to port 80`));
+const server = app.listen(process.env.PORT || 5000, () => console.log(`listening to port `+process.env.PORT || 5000));
 const cloneGit = require(`download-git-repo`);
 const mergedirs = require('merge-dirs').default;
 const mergeJSON = require(`json-merger`).mergeObjects;
 const zip = require('zip-folder');
 app.get(`/generate`, generate);
-
+app.use(express.static("public_html"));
 async function generate(req, res) {
 	res.send(`generating...`);
 	if(fs.existsSync(`tmp`)){
