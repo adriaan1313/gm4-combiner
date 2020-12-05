@@ -7,7 +7,7 @@ const mergedirs = require('merge-dirs').default;
 const mergeJSON = require(`json-merger`).mergeObjects;
 const zip = require('zip-folder');
 app.get(`/generate`, generate);
-app.use(express.static("public_html"));
+app.use(express.static("/release"));
 async function generate(req, res) {
 	res.send(`generating...`);
 	if(fs.existsSync(`tmp`)){
@@ -23,7 +23,14 @@ async function generate(req, res) {
 			console.log(`Downloaded!`);
 			merge();
 			if(!fs.existsSync(`release/`)) fs.mkdirSync(__dirname+`/release`, {recursive: true});
-			zip(`${__dirname}/tmp/merged`, `release/gm4_all_${timestamp()}.zip`, (e)=>{console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`)});
+			const ts = timestamp();
+			zip(`${__dirname}/tmp/merged`, `release/gm4_all_${ts}.zip`, (e)=>{
+				console.log(e ? `Error: ${e}` : `/release/gm4_all_${timestamp()}.zip created`);
+				if(!fs.existsSync(`release/release.json`)) write(`release/release.json`, `[]`);
+				let a = JSON.parse(fs.readFileSync(`release/release.json`));
+				a.push(ts);
+				write(`release/release.json`, JSON.stringify(a));
+			});
 		}
 	});
 };
