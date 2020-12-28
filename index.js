@@ -7,7 +7,7 @@ const mergedirs = require('merge-dirs').default;
 const mergeJSON = require(`json-merger`).mergeObjects;
 const zip = require('zip-folder');
 app.get(`/generate`, generate);
-app.use("/", express.static(__dirname + '/release')));
+app.use("/", express.static(__dirname + '/release'));
 async function generate(req, res) {
 	res.send(`generating...`);
 	if(fs.existsSync(`tmp`)){
