@@ -16,6 +16,7 @@
     "url": "https://github.com/adriaan1313/gm4-combiner/issues"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "download-git-repo": "^3.0.2",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
