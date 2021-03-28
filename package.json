@@ -20,7 +20,6 @@
     "download-git-repo": "^3.0.2",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
-    "json-merger": "^1.1.2",
     "merge-dirs": "^0.2.1",
     "zip-folder": "^1.0.0"
   }
